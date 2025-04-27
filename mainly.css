@@ -1,0 +1,299 @@
+@import url("https://aushevahmad.github.io/awesome-css/modules/custom-bar-prompt.css");
+@import url("https://minidiscordthemes.github.io/Snippets/ForumImprovements/main.css");
+@import url("https://nspc911.github.io/themes/vencord/SettingsModal.theme.css");
+@import url("https://nspc911.github.io/themes/vencord/BlurryBackdrop.theme.css");
+@import url("https://ukriu.github.io/cssCord/Other/noSuperReactions.css");
+@import url(https://blade04208.github.io/ddex4/src/bubbles.css);
+@import url(https://davart154.github.io/Themes/Snippets/Two-Row%20Chat%20Bar%20Layout/TwoRowChatBar.css);
+@import url('https://raw.githubusercontent.com/surgedevs/visual-refresh-compact-title-bar/refs/heads/main/desktop.css');
+/*Mr. ChrimsonChin Fix */
+@import url("https://scattagain.github.io/VencordStuff/css/GuildbarRevert.css");
+:root {
+    /* Only include this part if you wish to change these variables */
+    /* You can change the size but only to be less than 48px, you must change the blob scale too */
+    --guildbar-avatar-size: 48px;
+    --blob-scale: 48;
+
+    --guildbar-folder-size: var(--guildbar-avatar-size);
+    --folder-blob-scale: var(--blob-scale);
+}
+
+/*Timestamps*/
+span[class*="timestampInline_"] time::before {
+  content: attr(aria-label);
+  font-size: 12px;
+}
+
+span[class*="timestampInline_"] {
+  font-size: 0px !important;
+}
+
+/* Hide nameplates */
+[style^="background: linear-gradient(90deg"]:has([src*="/nameplates/"]) { display: none; }
+[class*="dm_"]:has([class*="linkPlated_"]) {
+    & [class*="linkPlated_"] { padding-right: var(--space-16); }
+    & [class*="closeButtonPlated_"] {
+        opacity: 0.7;
+        &:hover { opacity: 1; }
+        & [class^="innerCloseButtonPlated"] {
+            opacity: unset; 
+            background: none;
+            & svg {
+                color: inherit;
+                &:is(:hover, :focus-within) { color: var(--interactive-hover); }
+            }
+        }
+    }
+}
+
+/*Activity Status Fix*/
+[class*='membersGroup']:has([role=button]),
+[class*='member'] [class*='container']:has([class*='badges']) {
+  display: none;
+}
+
+.visual-refresh {
+  --vr-header-snippet-top: 0px;
+  --vr-header-snippet-server-padding: 16px;
+  --vr-header-snippet-space: 240px;
+  --vr-header-snippet-button-padding: 0;
+}
+
+/* Collapsible sidebars */
+.visual-refresh [class^="sidebarList_"] {
+  position: fixed; /* Remove if you don't want it to float */
+  width: 150px; /* Set to 0px if you don't want it to float */
+  container-type: unset;
+  opacity: 0%;
+  height: 100%;
+  z-index: 998;
+  left: -70px;
+  filter: drop-shadow(16px 16px 16px #0005) ;
+  transition-property: opacity, left, width;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.visual-refresh [class^="sidebar_"]:hover [class^="sidebarList_"] {
+  left: 70px;
+  opacity: 100%;
+  width: 300px; /* Set your preferred width here (resize handle is disabled) */
+}
+
+.visual-refresh [class*="guilds"] {
+  z-index: 999; /* So the sidebar pops from behind the servers */
+}
+
+.visual-refresh [class^="panels_"] {
+  position: fixed; /* Floating user panel (status, deafen, etc) */
+  width: 60px;
+  z-index: 999;
+  transition: width .5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.visual-refresh [class^="panels_"]:hover {
+  width: 300px;
+  z-index: 9999;
+}
+
+
+.visual-refresh [class^="panels_"] [class^="container__"] [class^="buttons__"] {
+
+  opacity: 0%;
+  scale: 0%; /* Because the buttons can't stay inside the panel on chromium (any help is appreciated) */
+  transition-property: opacity, margin-bottom, scale;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.visual-refresh .panels_c48ade:hover [class^="container__"] [class^="buttons__"] {
+ 
+   scale: 100%;
+   opacity: 100%;
+}
+
+.visual-refresh [class^="sidebarResizeHandle_"] {
+  display: none; /* Set your preferred width in the sidebar settings */
+}
+
+.visual-refresh [class^="container_"] [class^="membersWrap_"] {
+  position: fixed; /* Remove if you don't want it to float */
+  height: 100%;
+  opacity: 0%;
+  z-index: 999;
+  right: -260px;
+/*top: 80px;  /* Add/change this according to your desktop/client */
+  filter: drop-shadow(-16px -16px 16px #0005) ;
+  transition-property: right, opacity;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.visual-refresh [class^="container_"] [class^="membersWrap_"]:hover {
+  right: 0px;
+  opacity: 100%;
+}
+
+[class^="channelTextArea"]::after {
+    content: "";
+    width: 32px;
+    height: 32px;
+    bottom: calc(100% - 3px); /* Mess with the - 3px to change its vertical position */
+    right: 10px; /* Switch this from right to left to put it on the left side, or increase/decrease to change its position */
+    position: absolute;
+    image-rendering: pixelated;
+    pointer-events: none;
+    background-image: url("https://raw.githubusercontent.com/adryd325/oneko.js/14bab15a755d0e35cd4ae19c931d96d306f99f42/oneko.gif");
+    animation: oneko 1s infinite; /* change 1s to make the animation slower/faster */
+}
+
+@keyframes oneko {
+    /*
+    if you open the background image in ur browser, you will see that it has way more frames
+    so if you want, you could make ur own keyframes for a different animation
+    the top left frame is 0 0, second top row is -32 0, second row second is -32 -32 and so on
+    the ...00001% makes it so that there's no transition between the frames, so if you wanted say 3 frames, you'd do 0%, 33.3%; 33.30001%, 66.6%; 66.60001%, 100%
+    */
+    0%, 50% {
+        background-position: -64px 0;
+    }
+    50.0001%, 100% {
+        background-position: -64px -32px;
+    }
+}
+
+.quickswitcher_ac6cb0 {
+  background: 0 0 !important;
+  padding: 10px;
+  background-color: transparent !important;
+  backdrop-filter: blur(20px);
+  > * {
+    background: inherit !important;
+    background-color: inherit !important;
+  }
+  .scroller_ac6cb0 {
+    margin: 0;
+    border-radius: 0 0 8px 8px;
+    scrollbar-width: none;
+    padding: 4px !important;
+  }
+  .input_ac6cb0 { height: 50px }
+  .input_ac6cb0[value=""] { border-radius: 8px }
+  .input_ac6cb0:not([value=""]) { border-radius: 8px 8px 0 0 }
+  .protip_ac6cb0 { display: none }
+  .result__71961 { border-radius: 8px }
+  .content__99f8c > div:not(.result__71961):not([aria-hidden=true]) > .content__71961 {
+    height: 20px;
+    line-height: 20px;
+    > .header__71961 {
+      line-height: 20px;
+      margin-top: 0;
+      margin-bottom: 4px;
+    }
+  }
+}
+.backdrop__1a911:has(+ .layer_bc663c .quickswitcher_ac6cb0) { opacity: 0 }
+
+form>div.focusLock__49fc1>div.rootWithShadow__49fc1 {
+    width: var(--modal-width-medium);
+
+    .header__49fc1 {
+        padding: var(--modal-vertical-padding) var(--modal-horizontal-padding);
+        margin-bottom: var(--modal-vertical-padding);
+        border-bottom: var(--border-normal) solid 1px;
+
+        .colorHeaderPrimary_c9946a {
+            text-align: center;
+            font-weight: var(--font-weight-semibold);
+            flex-grow: 1;
+        }
+
+        .closeButton_e858dd {
+            top: unset;
+            right: var(--modal-horizontal-padding);
+            margin-bottom: auto;
+            margin-top: auto;
+
+            .contents__201d5 {
+                height: 24px;
+            }
+        }
+    }
+
+    .submissionWarning_e858dd {
+        display: none;
+    }
+
+    .formItem__1b11b .eyebrow_b717a1 {
+        margin-bottom: 4px;
+
+        .errorMessage_b717a1 {
+            color: var(--text-danger);
+        }
+    }
+
+    .input__0f084.error__0f084:focus {
+        color: var(--text-normal);
+        transition-property0: border-color, color;
+    }
+
+    .footer__49fc1 {
+        justify-content: space-between;
+    }
+}
+
+.avatarPopover__2d0a, .statusPopover__2d0ab, .activityPopover__2d0ab{display:none;}
+
+[class*="marketingButtonBackground"],
+[class*="newBadge_"],
+[class*="premiumTab"],
+[class*="premiumBadge"],
+[class*="premiumFeatureBorder"],
+div[class*="selectionGroup"]:has(div[class*="tryItOutButtons"] > button[class*="shinyButton_"]),
+[class*="upsell"],
+li[role="listitem"]:has(a[href="/store"]),
+li[role="listitem"]:has(a[href="/shop"])
+{display: none;}
+
+/* quest banner in gift inv */
+.container_c50183:has(.textContainer_c50183 > .headerContainer_c50183 > img[src="/assets/7749189229f35e2f.png"]) {
+    display: none;
+}
+
+/* newly added emojis in emoji picker */
+[class*="newlyAddedBadge_"] {display: none;}
+[class*="newlyAddedHighlight_"] {
+    border: unset !important;
+}
+
+/* shop upsell in profile editor in settings */
+div[style*="https://cdn.discordapp.com/assets/content/5d02fdeea"]  {
+    display: none;
+}
+
+/* quest icon when a user is actively doing a quest in the member list */
+div[class*="subText"] > div > svg[class*="questsIcon"] {
+    display: none;
+}
+
+:root {
+  /* The blur radius, can be *\
+  \*   any types of length   */
+  --blrbg-blur-by: 2px;
+  /* how dim you want the bg *\
+  \*   aside from the blur   */
+  --blrbg-dimmness: 25;
+}
+
+:root {
+  /* The blur radius, can be *\
+  \*   any types of length   */
+  --blrsm-blur-by: 5px;
+  /* how dim you want the bg *\
+  \*   aside from the blur   */
+  --blrsm-dimmness: 25;
+}
+
+:root {
+    --prompt-text: "cHECK YOUR CAPS LOCK"; /* replace --prompt-text with your desired text if you want */
+}
